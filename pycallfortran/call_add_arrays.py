@@ -2,16 +2,16 @@
 Author: wrry 
 email: wangrry@hotmail.com
 Date: 2023-06-16 01:01:32
-LastEditors: wrry wangrry@hotmail.com
-LastEditTime: 2023-06-16 01:16:29
-FilePath: /nonsense/pycallfortran/call_fortran.py
+LastEditors: wangrenruoyu@piesat.cn wangrry@hotmail.com
+LastEditTime: 2023-06-16 13:57:19
+FilePath: /nonsense/pycallfortran/call_add_arrays.py
 Description: 
 '''
 import ctypes
 import numpy as np
 
 # 加载.so文件
-lib = ctypes.CDLL('./libadd_arrays.so')
+lib = ctypes.CDLL('./lib_add_arrays.so')
 
 # 定义函数原型
 add_arrays = lib.add_arrays_
@@ -20,7 +20,7 @@ add_arrays.argtypes = [
     np.ctypeslib.ndpointer(dtype=np.float32, flags='C_CONTIGUOUS'),  # array1
     np.ctypeslib.ndpointer(dtype=np.float32, flags='C_CONTIGUOUS'),  # array2
     np.ctypeslib.ndpointer(dtype=np.float32, flags='C_CONTIGUOUS'),  # result
-    ctypes.c_int                                                   # size
+    ctypes.POINTER(ctypes.c_int)                                     # size
 ]
 
 # 创建输入数组
@@ -32,7 +32,8 @@ size = len(array1)
 result = np.zeros_like(array1)
 
 # 调用函数
-add_arrays(array1, array2, result, size)
+add_arrays(array1, array2, result, ctypes.pointer(ctypes.c_int(size)))
+# add_arrays(array1, array2, result, size)
 
 # 输出结果
 print("Result:", result)
