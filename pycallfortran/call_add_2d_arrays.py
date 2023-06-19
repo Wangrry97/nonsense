@@ -3,7 +3,7 @@ Author: wangrenruoyu@piesat.cn
 email: wangrry@hotmail.com
 Date: 2023-06-16 11:31:09
 LastEditors: wangrenruoyu@piesat.cn wangrry@hotmail.com
-LastEditTime: 2023-06-16 11:38:49
+LastEditTime: 2023-06-19 13:38:40
 FilePath: /nonsense/pycallfortran/call_add_2d_arrays.py
 Description: 
 '''
@@ -24,10 +24,10 @@ add_2d_arrays.argtypes = [
 ]
 
 # 创建输入二维数组
-array = np.array([[1.0, 2.0, 3.0],
-                  [4.0, 5.0, 6.0]], dtype=np.float64)
+array = np.array([[1.0, 2.0, 3.0, 4.0],
+                  [4.0, 5.0, 6.0, 7.0]], dtype=np.float64)
 nrows, ncols = array.shape
-
+print(nrows, ncols)
 # 创建输出一维数组
 result = np.zeros(nrows, dtype=np.float64)
 
