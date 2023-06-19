@@ -3,7 +3,7 @@ Author: wrry
 email: wangrry@hotmail.com
 Date: 2023-06-16 01:01:32
 LastEditors: wangrenruoyu@piesat.cn wangrry@hotmail.com
-LastEditTime: 2023-06-19 13:49:32
+LastEditTime: 2023-06-19 15:34:08
 FilePath: /nonsense/pycallfortran/call_libirbem.py
 Description: 
 '''
@@ -34,10 +34,21 @@ whichm = 3
 whatf = 3
 nene = 1
 
-energy = np.zeros(100000, dtype=np.float64)
+energy = np.zeros(50, dtype=np.float64)
 BBo = np.zeros(100000, dtype=np.float64)
 L = np.zeros(100000, dtype=np.float64)
 flux = np.zeros(2500000, dtype=np.float64)
+
+# 根据示例传参
+for i in range(energy.shape[0]):
+    if i % 2 == 0:
+        energy[i] = 0.5
+    else:
+        energy[i] = 0.7
+for i in range(BBo.shape[0]):
+    BBo[i] = 2.5
+for i in range(L.shape[0]):
+    L[i] = 2.15
 
 # 调用函数
 libirbem.get_ae8_ap8_flux_(
@@ -52,4 +63,7 @@ libirbem.get_ae8_ap8_flux_(
 )
 
 # 打印结果
-print("Flux:", flux)
+print(BBo)
+print(L)
+print(energy)
+print("Flux:", flux[:100001])
